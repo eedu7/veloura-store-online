@@ -1,0 +1,79 @@
+{
+    "editor.acceptSuggestionOnEnter": "smart",
+    "editor.autoIndentOnPaste": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.fixAll.ruff": "always",
+        "source.organizeImports.ruff": "always",
+        "source.sort.json": "always",
+        "source.unusedImports": "always"
+    },
+    "editor.codeLens": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.inlineSuggest.enabled": true,
+    "editor.quickSuggestions": {
+        "comments": true,
+        "other": "on",
+        "strings": true
+    },
+    "editor.suggest.showClasses": true,
+    "editor.suggest.showKeywords": true,
+    "editor.suggest.showMethods": true,
+    "editor.suggest.showModules": true,
+    "editor.suggest.showVariables": true,
+    "editor.suggest.showWords": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestOnTriggerCharacters": true,
+    "explorer.compactFolders": false,
+    "files.exclude": {
+        ".ruff_cache": true,
+        ".venv": true,
+        "**/__pycache__": true,
+        "**/.coverage": true,
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.htmlcov": true,
+        "**/.mypy_cache": true,
+        "**/.pytest_cache": true,
+        "**/.svn": true,
+        "**/.tox": true,
+        "**/*/pyc": true,
+        "**/Thumbs.db": true
+    },
+    "files.watcherExclude": {
+        "**/__pycache__/**": true,
+        "**/.env/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true,
+        "**/.mypy_cache/**": true,
+        "**/.pytest_cache/**": true,
+        "**/env/**": true,
+        "**/venv/**": true
+    },
+    "python.analysis.addHoverSummaries": true,
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.extraPaths": [
+        "./src",
+        "./app",
+        "./routes"
+    ],
+    "python.analysis.inlayHints.callArgumentNames": "all",
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.typeCheckingMode": "standard",
+    "python.defaultInterpreterPath": ".venv\\Scripts\\python.exe",
+    "python.terminal.activateEnvironment": true,
+    "ruff.enable": true,
+    "ruff.fixAll": true,
+    "ruff.format.backend": "uv",
+    "ruff.lineLength": 120,
+    "ruff.lint.enable": true,
+    "ruff.lint.extendSelect": [
+        "I"
+    ],
+    "ruff.organizeImports": true,
+    "python-envs.pythonProjects": []
+}
