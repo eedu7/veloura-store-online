@@ -12,3 +12,9 @@ class RegisterRequet(BaseModel):
     email: str
     password: str
     phone_number: str
+
+
+class AuthResponse(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "Bearer"
