@@ -3,8 +3,12 @@ from uuid import uuid4
 
 from core.config import config
 from jose import JWTError, jwt
-from jose.exceptions import ExpiredSignatureError, JWTClaimsError
+from jose.exceptions import ExpiredSignatureError
 from utils import get_timestamp
+
+
+class JWTException(Exception):
+    pass
 
 
 class JWTHandler:
@@ -20,13 +24,17 @@ class JWTHandler:
         token_type: Literal["access", "refresh"] = "access",
     ) -> str:
         to_encode = payload.copy()
-        to_encode.update({"iat": get_timestamp()})
+        to_encode["iat"] = get_timestamp()
 
         if token_type == "access":
             to_encode.update({"token_type": "access", "exp": get_timestamp(minutes=cls.ACCESS_EXPIRY_MINUTES)})
         elif token_type == "refresh":
             to_encode.update(
-                {"token_type": "refresh", "jti": str(uuid4()), "exp": get_timestamp(minutes=cls.REFRESH_EXPIRY_MINUTES)}
+                {
+                    "token_type": "refresh",
+                    "jti": str(uuid4()),
+                    "exp": get_timestamp(minutes=cls.REFRESH_EXPIRY_MINUTES),
+                }
             )
 
         return jwt.encode(to_encode, cls.SECRET_KEY, algorithm=cls.ALGORITHM)
@@ -39,14 +47,13 @@ class JWTHandler:
                 cls.SECRET_KEY,
                 algorithms=[cls.ALGORITHM],
             )
+        except ExpiredSignatureError as exc:
+            raise JWTException(f"Expired token: {exc}")
+        except JWTError as exc:
+            raise JWTException(f"Invalid JWT token: {exc}")
 
-        except ExpiredSignatureError:
-            raise ValueError("Expired token")
-        except JWTClaimsError:
-            raise ValueError("Invalid token claims")
-        except JWTError:
-            raise ValueError("Invalid JWT token")
+        token_type = payload.get("token_type")
+        if token_type not in {"access", "refresh"}:
+            raise JWTException("Unknown token type")
 
-        if payload.get("token_type") not in {"access", "refresh"}:
-            raise ValueError("Unknown token type")
         return payload

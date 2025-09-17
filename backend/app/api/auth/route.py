@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 def generate_token(user: User) -> AuthResponse:
-    payload = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email}
+    payload = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "sub": str(user.id)}
     access_token: str = JWTHandler.encode(payload, "access")
     refresh_token: str = JWTHandler.encode(payload, "refresh")
 

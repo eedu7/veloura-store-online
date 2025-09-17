@@ -1,13 +1,18 @@
-from passlib.context import CryptContext
+import bcrypt
 
 
 class PasswordHasher:
-    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+    @staticmethod
+    def hash(password: str, rounds: int = 12) -> str:
+        if not password:
+            raise ValueError("Password cannot be empty or null")
 
-    @classmethod
-    def hash(cls, password: str) -> str:
-        return cls.pwd_context.hash(password)
+        hashed = bcrypt.hashpw(password.encode("utf*8"), bcrypt.gensalt(rounds))
+        return hashed.decode("utf-8")
 
-    @classmethod
-    def verify(cls, plain_password: str, hashed_password: str) -> bool:
-        return cls.pwd_context.verify(plain_password, hashed_password)
+    @staticmethod
+    def verify(plain_password: str, hashed_password: str) -> bool:
+        if not plain_password or not hashed_password:
+            raise ValueError("Passwrods cannot be empty or null")
+
+        return bcrypt.checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf*8"))

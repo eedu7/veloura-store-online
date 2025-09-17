@@ -1,17 +1,16 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from pydantic_extra_types.phone_numbers import PhoneNumber
 
 
 class LoginRequest(BaseModel):
-    email: str
-    password: str
+    email: str = Field(..., examples=["john.doe@example.com"])
+    password: str = Field(..., examples=["Password@123"])
 
 
-class RegisterRequet(BaseModel):
-    first_name: str
-    last_name: str
-    email: str
-    password: str
-    phone_number: str
+class RegisterRequet(LoginRequest):
+    first_name: str = Field(..., examples=["John"])
+    last_name: str = Field(..., examples=["Doe"])
+    phone_number: PhoneNumber = Field(..., examples=["+92-300-0000000"])
 
 
 class AuthResponse(BaseModel):
