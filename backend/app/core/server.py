@@ -1,8 +1,9 @@
 from contextlib import asynccontextmanager
 
-from api import router
-from core.session import Base, engine
 from fastapi import FastAPI
+
+from app.api import router
+from app.core.session import Base, engine
 
 
 @asynccontextmanager

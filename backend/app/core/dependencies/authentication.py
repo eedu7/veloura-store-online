@@ -1,6 +1,7 @@
-from core.security import JWTException, JWTHandler
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+
+from app.core.security import JWTException, JWTHandler
 
 
 class AuthenticationRequired:

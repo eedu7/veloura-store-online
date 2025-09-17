@@ -1,10 +1,11 @@
 from typing import Any, Dict, Literal
 from uuid import uuid4
 
-from core.config import config
 from jose import JWTError, jwt
 from jose.exceptions import ExpiredSignatureError
-from utils import get_timestamp
+
+from app.core.config import config
+from app.utils import get_timestamp
 
 
 class JWTException(Exception):

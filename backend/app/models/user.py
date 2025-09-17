@@ -1,8 +1,9 @@
 from uuid import uuid4
 
-from core.session import Base
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
+
+from app.core.session import Base
 
 
 class User(Base):

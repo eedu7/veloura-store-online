@@ -1,10 +1,11 @@
 from typing import Annotated
 
-from core.dependencies.authentication import AuthenticationRequired
-from core.session import get_session
 from fastapi import Depends, HTTPException, status
-from models.user import User
 from sqlalchemy.orm import Session
+
+from app.core.dependencies.authentication import AuthenticationRequired
+from app.core.session import get_session
+from app.models.user import User
 
 
 def get_current_user(session: Annotated[Session, Depends(get_session)], auth: AuthenticationRequired = Depends()):

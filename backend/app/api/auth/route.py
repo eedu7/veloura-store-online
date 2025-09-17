@@ -1,13 +1,14 @@
 from typing import Annotated
 
-from core.security.jwt_handler import JWTHandler
-from core.security.password_hasher import PasswordHasher
-from core.session import get_session
 from fastapi import APIRouter, Depends, HTTPException, status
-from models.user import User
-from schemas.auth import AuthResponse, LoginRequest, RegisterRequet
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+
+from app.core.security.jwt_handler import JWTHandler
+from app.core.security.password_hasher import PasswordHasher
+from app.core.session import get_session
+from app.models.user import User
+from app.schemas.auth import AuthResponse, LoginRequest, RegisterRequet
 
 router = APIRouter()
 
